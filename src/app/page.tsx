@@ -7,7 +7,7 @@ import { EstherEditor } from "./types/EstherEditor";
 
 export default function Home() {
   const editorRef = useRef<any>(null);
-  const [feedbackInput, setFeedbackInput] = useState(""); 
+  const [feedbackInput, setFeedbackInput] = useState("");
   const [feedback, setFeedback] = useState("");
 
   // This function will be called every time the editor updates
@@ -67,7 +67,7 @@ export default function Home() {
         {feedback ? (
           <span className="text-black">{feedback}</span>
         ) : (
-          <span className="text-gray-500">This is Tung's 😉 feedback.</span>
+          <span className="text-gray-500">This is Tung&rsquo;s 😉 feedback.</span>
         )}
       </div>
     </div>
