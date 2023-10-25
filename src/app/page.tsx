@@ -1,54 +1,74 @@
-'use client';
+"use client";
+import { get } from "http";
 import { Editor } from "novel";
-import { useState, useRef } from 'react';
+import { Editor as EditorTipTap } from "@tiptap/core";
+import { useState, useRef } from "react";
+import { EstherEditor } from "./types/EstherEditor";
 
 export default function Home() {
   const editorRef = useRef<any>(null);
+  const [feedbackInput, setFeedbackInput] = useState(""); 
+  const [feedback, setFeedback] = useState("");
 
   // This function will be called every time the editor updates
-  const handleUpdate = (editor: any) => {
-    editorRef.current = editor;  // Store the editor instance in the ref
-  };
-  console.log('trying to get feedback')
-  // This function retrieves and logs the entire text content from the editor
-  const logEditorContent = () => {
-    if (editorRef.current) {
-      const allText = editorRef.current.getText();
-      console.log(allText);
-      console.log('Getting feedback');
+  const handleUpdate = (editor: EditorTipTap | undefined) => {
+    if (!editor) {
+      return;
     }
+    const text = editor.getText();
+    setFeedbackInput(text);
   };
-  const [feedback, setFeedback] = useState('');
 
   const getFeedback = async () => {
     // Send request to the API for feedback
-    console.log('Getting feedback');
     // TODO: set feedback here once the api works
-    const response = await fetch('http://localhost:3000/api/feedback', {
-      method: 'POST',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
-      // body: JSON.stringify({ prompt: '' }), // Empty string since content is fetched within the API
+    console.log("get feedback function runnining");
+    const response = await fetch("http://localhost:3000/api/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: feedbackInput }), // Empty string since content is fetched within the API
     });
-
     if (response.ok) {
-      const data = await response.text();
-      setFeedback(data);
-    } else {
-      const errorMessage = await response.text();
-      console.error('Failed to fetch feedback:', errorMessage);
+      if (response.body) {
+        const reader = response.body.getReader();
+        let text = "";
+        while (true) {
+          const { done, value } = await reader.read();
+
+          if (done) {
+            break;
+          }
+
+          // Convert the Uint8Array to a string and append it to the existing text
+          text += new TextDecoder("utf-8").decode(value);
+          setFeedback(text);
+        }
+      } else {
+        const errorMessage = await response.text();
+        console.error("Failed to fetch feedback:", errorMessage);
+      }
     }
   };
   return (
-    <div className='flex flex-col items-center justify-center my-10 text-black'>
-      <Editor completionApi="/api/generate" onUpdate={handleUpdate} />
-      <button onClick={logEditorContent} className='-mt-20 py-4 px-4 bg-white border rounded'>Feedback</button>
+    <div className="flex flex-col items-center justify-center my-10 text-black">
+      <Editor completionApi="/api/generate" onDebouncedUpdate={handleUpdate} />
+      <button
+        onClick={getFeedback}
+        className="-mt-20 py-4 px-4 bg-white border rounded"
+      >
+        Feedback
+      </button>
       <div
         id="feedback-output"
-        className="mt-4 p-2 border rounded bg-white w-1/2" 
+        className="mt-4 p-2 border rounded bg-white w-2/3"
       >
-        {feedback || 'test test'} {/* Display feedback or default text */}
+        {feedback ? (
+          <span className="text-black">{feedback}</span>
+        ) : (
+          <span className="text-gray-500">This is Tung's 😉 feedback.</span>
+        )}
       </div>
     </div>
   );
