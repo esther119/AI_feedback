@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/core": "^2.1.12",
+    "@upstash/ratelimit": "^0.4.4",
+    "@vercel/kv": "^0.2.3",
+    "ai": "^2.2.18",
     "axios": "^1.5.1",
     "next": "13.5.6",
     "novel": "^0.1.22",

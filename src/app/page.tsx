@@ -23,7 +23,7 @@ export default function Home() {
     // Send request to the API for feedback
     // TODO: set feedback here once the api works
     console.log("get feedback function runnining");
-    const response = await fetch("http://localhost:3000/api/feedback", {
+    const response = await fetch("/api/feedback", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

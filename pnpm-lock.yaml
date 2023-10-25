@@ -5,6 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@tiptap/core':
+    specifier: ^2.1.12
+    version: 2.1.12(@tiptap/pm@2.1.12)
+  '@upstash/ratelimit':
+    specifier: ^0.4.4
+    version: 0.4.4
+  '@vercel/kv':
+    specifier: ^0.2.3
+    version: 0.2.3
+  ai:
+    specifier: ^2.2.18
+    version: 2.2.18(react@18.2.0)(solid-js@1.8.3)(svelte@4.2.2)(vue@3.3.6)
   axios:
     specifier: ^1.5.1
     version: 1.5.1
@@ -1733,8 +1745,8 @@ packages:
       humanize-ms: 1.2.1
     dev: false
 
-  /ai@2.2.17(react@18.2.0)(solid-js@1.8.3)(svelte@4.2.2)(vue@3.3.6):
-    resolution: {integrity: sha512-A84UTv5/qSyuDcTfrtnCvKRxIHYunCOMyRLEvVGaJJLw3slnUpPf/tD9WfxNEO8Gh3thmI3xDWkEmqt1vYXEaw==}
+  /ai@2.2.18(react@18.2.0)(solid-js@1.8.3)(svelte@4.2.2)(vue@3.3.6):
+    resolution: {integrity: sha512-29wVZp58HJwCST90pvHLo3gTJ+BObD93mVsL5aHU7q01K8hD+wD7RaVDekmlDnHTXdCOYndoRdFeE0OHsdpheQ==}
     engines: {node: '>=14.6'}
     peerDependencies:
       react: ^18.2.0
@@ -4219,7 +4231,7 @@ packages:
       '@vercel/analytics': 1.1.1
       '@vercel/blob': 0.9.3
       '@vercel/kv': 0.2.3
-      ai: 2.2.17(react@18.2.0)(solid-js@1.8.3)(svelte@4.2.2)(vue@3.3.6)
+      ai: 2.2.18(react@18.2.0)(solid-js@1.8.3)(svelte@4.2.2)(vue@3.3.6)
       clsx: 1.2.1
       eslint: 8.36.0
       eslint-config-next: 13.2.4(eslint@8.36.0)(typescript@4.9.5)
