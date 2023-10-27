@@ -23,12 +23,12 @@ export default function Home() {
     // Send request to the API for feedback
     // TODO: set feedback here once the api works
     console.log("get feedback function runnining");
-    const response = await fetch("/api/feedback", {
+    const response = await fetch("/api/cohereGenerate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: feedbackInput }), // Empty string since content is fetched within the API
+      body: JSON.stringify({ prompt: feedbackInput }), 
     });
     if (response.ok) {
       if (response.body) {
@@ -53,7 +53,7 @@ export default function Home() {
   };
   return (
     <div className="flex flex-col items-center justify-center my-10 text-black">
-      <Editor completionApi="/api/cohereGenerate" onDebouncedUpdate={handleUpdate} defaultValue=''/>
+      <Editor completionApi="/api/generate" onDebouncedUpdate={handleUpdate} defaultValue=''/>
       <button
         onClick={getFeedback}
         className="-mt-20 py-4 px-4 bg-white border rounded"
