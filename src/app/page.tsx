@@ -53,7 +53,7 @@ export default function Home() {
   };
   return (
     <div className="flex flex-col items-center justify-center my-10 text-black">
-      <Editor completionApi="/api/cohereGenerate" onDebouncedUpdate={handleUpdate} />
+      <Editor completionApi="/api/cohereGenerate" onDebouncedUpdate={handleUpdate} defaultValue=''/>
       <button
         onClick={getFeedback}
         className="-mt-20 py-4 px-4 bg-white border rounded"
